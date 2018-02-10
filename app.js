@@ -13,7 +13,12 @@ const cors = require('koa2-cors');
 const router = require('koa-router')();
 
 const Route = require('./routes/collection');
-
+const corsOptions = {
+  origin: '*',
+  credentials: true,
+  exposedHeaders: '*',
+  allowedHeaders: '*'
+}
 // error handler
 onerror(app);
 
@@ -27,7 +32,7 @@ app.use(koaBunyanLogger.requestLogger());
 app.use(helmet());
 
 // accept cross domain
-app.use(cors());
+app.use(cors(corsOptions));
 
 // middlewares
 app.use(bodyparser({
@@ -54,7 +59,7 @@ app.use(async (ctx, next) => {
 });
 */
 
-Route(app,router);
+Route(app, router);
 
 // error-handling
 app.on('error', (err, ctx) => {
