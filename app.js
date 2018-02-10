@@ -54,7 +54,7 @@ app.use(async (ctx, next) => {
 });
 */
 
-Route(app, router);
+Route(app,router);
 
 // error-handling
 app.on('error', (err, ctx) => {
