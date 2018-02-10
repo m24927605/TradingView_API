@@ -13,6 +13,8 @@ const cors = require('koa2-cors');
 const router = require('koa-router')();
 
 const Route = require('./routes/collection');
+
+//cors options list
 const corsOptions = {
   origin: '*',
   credentials: true,
@@ -25,9 +27,11 @@ onerror(app);
 //bunyan log
 const appLogger = bunyan.createLogger(bunyanOpts);
 
+//koabunyan loaded into middleware
 app.use(koaBunyanLogger(appLogger));
 app.use(koaBunyanLogger.requestIdContext());
 app.use(koaBunyanLogger.requestLogger());
+
 // security module
 app.use(helmet());
 
@@ -40,6 +44,7 @@ app.use(bodyparser({
 }));
 app.use(json());
 app.use(logger());
+
 /*
 app.use(require('koa-static')(__dirname + '/public'));
 */
@@ -49,6 +54,7 @@ app.use(views(__dirname + '/views', {
   extension: 'ejs'
 }));
 */
+
 // logger
 /*
 app.use(async (ctx, next) => {
@@ -59,6 +65,7 @@ app.use(async (ctx, next) => {
 });
 */
 
+//load routes
 Route(app, router);
 
 // error-handling
