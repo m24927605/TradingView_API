@@ -1,0 +1,18 @@
+{
+    "title": "GET /symbols check url query",
+    "description": "describes properties required to check",
+    "type": "object",
+    "properties": {
+        "symbol": {
+            "type": "string",
+            "minLength": 1,
+            "not": {
+                "pattern": " "
+            },
+            "description": "This is a symbol of futures"
+        }
+    },
+    "required": [
+        "symbol"
+    ]
+}

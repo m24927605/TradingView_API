@@ -1,26 +1,36 @@
 'use strict';
 
 module.exports = (router) => {
+  const reqValidate = require('../../services/helper/req.validate')();
+
   router.prefix('/tradingView')
 
-  router.get('/', function (ctx, next) {
-    console.log('wowowwww');
+  router.get('/', async (ctx, next) => {
     ctx.body = 'this is a /tradingView response!'
   });
 
-  router.get('/time', function (ctx, next) {
+
+  router.get('/time', async (ctx, next) => {
     ctx.body = 'this is a /tradingView/time response'
   });
 
-  router.get('/config', function (ctx, next) {
+  router.get('/config', async (ctx, next) => {
     ctx.body = 'this is a /tradingView/config response'
   });
 
-  router.get('/symbols', function (ctx, next) {
+  //參數檢查層
+  router.use('/symbols', (ctx, next) => {
+    reqValidate.checkQuery('symbols', ctx, next);
+  });
+  router.get('/symbols', async (ctx, next) => {
     ctx.body = 'this is a /tradingView/symbols response'
   });
 
-  router.get('/history', function (ctx, next) {
+  //參數檢查層
+  router.use('/history', (ctx, next) => {
+    reqValidate.checkQuery('history', ctx, next);
+  });
+  router.get('/history', async (ctx, next) => {
     ctx.body = 'this is a /tradingView/history response'
   });
 };
